@@ -74,6 +74,7 @@ class PostController extends Controller
     }else{
         return redirect('/');
     }
+    }
 
     /**
      * Update the specified resource in storage.
