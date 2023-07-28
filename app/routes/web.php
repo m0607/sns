@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,10 +21,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //投稿
-Route::resource('posts','PostController');
+Route::resource('/posts','PostController');
 
 //いいね
 // Route::resource('likes','LikeController');
 
 //報告
-Route::resource('reports','ReportsController');
+Route::resource('/reports','ReportsController');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Post;
+
 class PostController extends Controller
 {
     /**
@@ -13,6 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        
         return view('posts.index');  /** 表示 */
     }
 
@@ -23,7 +26,7 @@ class PostController extends Controller
      */
     public function create()    
     {
-        $this->middleware('auth')->except(['posts,index']);  /** 投稿登録 */
+        return view('posts.create');  /** 投稿登録 */
     }
 
     /**
@@ -34,13 +37,16 @@ class PostController extends Controller
      */
     public function store(Request $request)    //新規投稿の保存
     {
+
         $post = new Post;
-        $post->user_id = auth()->id();
+        $post->user_id = 1;
         $post->title = $request->title;
-        $post->main = $request->main;
+        $post->text = $request->body;
+        $post->image = $request->image;
+        $post->area = $request->area;
         $post->save();
 
-        return redirect('/'); 
+        return redirect('/posts'); 
     }
 
     /**
@@ -49,12 +55,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)   //個別の投稿ページの表示
+    public function show($id)   //個別の投稿詳細ページの表示
     {
     // URLのidと一致する投稿を取得
-    $val = Post::findOrFail($id); 
+    $val = Post::findOrFail($id);    //findOrFail 404エラーになる
 
-    return view ('?.?')->with('val', $val);
+    return view ('posts.create')->with('val', $val);
     }
 
     /**
@@ -66,11 +72,11 @@ class PostController extends Controller
     public function edit($id)   //投稿編集画面の表示
     {
     // URLと一致する投稿を取得
-    $val = Post::findOrFail($id);
+    $val = Post::findOrFail($id);  //findOrFail 404エラーになる
 
     // ログインユーザーとuser_idが一致しない場合はTOPにリダイレクトする
     if($val->user_id == auth()->id()){
-        return view('?.?')->with('val',$val);
+        return view('posts.create')->with('val',$val);
     }else{
         return redirect('/');
     }
@@ -86,12 +92,12 @@ class PostController extends Controller
     public function update(Request $request, $id)  //投稿更新の保存
     {
      // 同じIDの投稿を探して、上書き保存
-     $post = Post::findOrFail($id);
+     $post = Post::find($id);
      $post->title = $request->title;
      $post->main = $request->main;
      $post->save();
 
-     return redirect('/');  
+        return redirect('/sample');
     }
 
     /**

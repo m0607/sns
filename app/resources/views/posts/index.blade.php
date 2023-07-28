@@ -1,31 +1,26 @@
-<!-- 新規投稿登録画面 -->
+<!-- 新規投稿一覧画面 -->
 
 @extends('layouts.app')
  
 @section('content')
 <div class="container">
-    <h1>新規投稿</h1>
-    <form action="{{route('posts.store')}}" method="post">
-        @csrf
-        <div class="form-group">
-            <label for="title">タイトル</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{old('title')}}" placeholder="タイトルを入力してください">
+    <div class="row">
+      <div class="col-8">
+        <div class="input-daterange input-group" id="datepicker">
+          <div class="input-group-prepend">
+            <span class="input-group-text">開始日付</span>
+          </div>
+          <input type="date" class="input-sm form-control" name="from" />
+          ~
+          <div class="input-group-append">
+            <span class="input-group-text">終了日付</span>
+          </div>
+            <input type="date" class="input-sm form-control" name="to" />
+        <form>
+            <input type="submit" value="探す" class="btn btn-primary">
+        </form>
         </div>
-        <div class="d-flex flex-column bd-highlight mb-3">
-            <label for="image">画像</label>
-            <input type="file" id="image" accept="image/*">
-            <img id="preview"> 
-        </div>
-        <div class="form-group">
-            <label for="area">投稿所在地</label>
-            <textarea name="area" id="area" class="form-control" rows="1" placeholder="投稿所在地をを入力してください">{{old('area')}}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="body">エピソード</label>
-            <textarea name="body" id="body" class="form-control" rows="5" placeholder="エピソードを入力してください">{{old('body')}}</textarea>
-        </div>
-        <input type="submit" value="投稿" class="btn btn-primary">
-        <input type="reset" value="キャンセル" class="btn btn-secondary" onclick='window.history.back(-1);'>
-    </form>
+      </div>
+    </div>
 </div>
 @endsection
