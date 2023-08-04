@@ -13,10 +13,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()    //一覧表示
     {
-        
-        return view('posts.index');  /** 表示 */
+        $posts = \DB::table('posts')->get();    // データ全件取得
+
+        return view('posts.index', [
+            'posts' => $posts,
+            // 'title' =>  $title,
+        ]);  /** 表示 */
     }
 
     /**
@@ -39,7 +43,7 @@ class PostController extends Controller
     {
 
         $post = new Post;
-        $post->user_id = 1;
+        $post->user_id = 1;             //まだ設定してないからとりあえず１
         $post->title = $request->title;
         $post->text = $request->body;
         $post->image = $request->image;
