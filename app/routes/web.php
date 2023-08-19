@@ -11,6 +11,10 @@
 |
 */
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,8 +27,25 @@ Route::get('/home', 'HomeController@index')->name('home');
 //投稿
 Route::resource('/posts','PostController');
 
+//検索
+Route::get('/posts', 'PostController@index')->name('posts.serch');
+
 //いいね
 // Route::resource('likes','LikeController');
 
 //報告
 Route::resource('/reports','ReportsController');
+
+//管理者ページ
+Route::get('/admin',[AdminController::class,'admin']);//管理者ページに飛んでくるための
+Route::get('/user',[AdminController::class,'admin1'])->name('admin.serch');//ユーザーボタン押して飛ぶ
+Route::get('/create',[AdminController::class,'admin2'])->name('admin.post');//投稿ボタン押して飛ぶ
+
+//ユーザー表示停止
+Route::get('/user_delete/{id}',[AdminController::class,'admin_delete'])->name('admin.delete');
+
+//投稿表示停止
+Route::get('/post_delete/{id}',[AdminController::class,'post_delete'])->name('post.delete');
+
+//コメント
+Route::resource('/comments','CommentsController');

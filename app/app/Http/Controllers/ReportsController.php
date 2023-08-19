@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Report;      //モデル
+
+
 class ReportsController extends Controller
 {
     /**
@@ -13,7 +16,7 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        return view('reports.reports');  /** ? */
+        return view('reports.index');  /** ? */
     }
 
     /**
@@ -21,9 +24,9 @@ class ReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('reports.create')->with('post_id', $request->post_id);
     }
 
     /**
@@ -32,9 +35,14 @@ class ReportsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//新規投稿の保存
     {
-        //
+        $report = new Report;
+        $report->post_id = $request->post_id;
+        $report->content = $request->content;
+        $report->save();
+
+        return view('reports.index');
     }
 
     /**
@@ -43,9 +51,10 @@ class ReportsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id)//個別の投稿詳細ページの表示
     {
-        //
+        return view('/reports');
+
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     protected $guarded = [
@@ -15,5 +16,14 @@ class Post extends Model
         "created_at",
         "updated_at"
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);  //1対多の1
+    }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);  //1対多の1
+    }
 
 }

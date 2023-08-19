@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Comments;   //モデル
+use Illuminate\Http\Request;
+
+use App\User;      //モデル
+use App\Post;      //モデル
 
 
-class CommentsController extends Controller
+
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +20,13 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        return view('comments.blade');  /** ? */
+        if(auth::user()->role==1){//０ユーザーの時、１ユーザーの時、if文
+            return view('admin.'); //１ユーザーの時 admin.blade を表示
+            }else{
+                return redirect('/posts'); //view()はviewsフォルダーの表示させたいbladeファイル書く
+            }
+
+
     }
 
     /**
@@ -38,14 +47,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new Comments;
-        $comment->user_id = Auth::id();  //->post_idはname
-        $comment->post_id = $request->post_id;  //->post_idはname
-        $comment->comment = $request->comment;
-        $comment->save();
-
-        return redirect()->route('posts.show',$comment->post_id); //
-
+        //
     }
 
     /**
@@ -92,4 +94,41 @@ class CommentsController extends Controller
     {
         //
     }
+    public function admin(){
+
+        return view('admin.admin');
+    }
+    public function admin1(){ //ユーザー検索
+
+        $admin = User::withCount('post')->where('del_flg','=','0')->where('role','=','0')->get();    // データ全件取得
+        
+        return view('admin.user', [
+            'admin' => $admin,            
+           
+        ]); 
+
+    }
+    public function admin2(){
+        $admin = Post::withCount('report')->where('del_flg','=','0')->get();    // データ全件取得
+        return view('admin.create', [
+            'admin' => $admin,            
+           
+        ]); 
+
+    }
+    public function admin_delete($id){
+        $user=User::find($id);
+        $user->del_flg=1;
+        $user->save();
+    return redirect('/user');
+    }
+
+    public function post_delete($id){
+        $post=Post::find($id);
+        $post->del_flg=1;
+        $post->save();
+    return redirect('/create');
+    }
+
 }
+

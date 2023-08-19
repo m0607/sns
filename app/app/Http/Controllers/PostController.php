@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 use App\Post;      //モデル
+use App\Comment;      //モデル
+
 
 class PostController extends Controller
 {
@@ -15,16 +19,25 @@ class PostController extends Controller
      */
     public function index(Request $request)    //一覧表示
     {
-        if($post = request('posts')){
-            $keyword=$request->keyword;
-        $a=Post::where('title','text','area','%$keyword%')->get();
+        if(isset($request['keyword'] )){
+            $keyword = $request -> input('keyword');
+            $post = Post::query();   // データ全件取得
+
+        $posts = $post->where('text','LIKE','%'.$keyword.'%')     //あいまい検索
+                      ->orwhere('title','LIKE','%'.$keyword.'%')
+                      ->orwhere('area','LIKE','%'.$keyword.'%')->get();
+
+        return view('posts.index', [
+            'posts' => $posts,
+            // 'keyword' => $key
+            // 'title' =>  $title,
+        ]);  /** 表示 */
 
     }else{
         $posts = \DB::table('posts')->get();    // データ全件取得
 
         return view('posts.index', [
-            'posts' => $posts,
-            'keyword'=>$a,
+            'posts' => $posts,            
             // 'title' =>  $title,
         ]);  /** 表示 */
     }
@@ -53,7 +66,11 @@ class PostController extends Controller
         $post->user_id = 1;             //まだ設定してないからとりあえず１
         $post->title = $request->title;
         $post->text = $request->body;
-        $post->image = $request->image;
+        $post->image = $request->image;   //画像のパスを表示させる（文字）
+
+        //画像登録
+        // $image = request()->file('image');   //画像の保存仕方
+        // request()->file('image')->store('', $image, 'public');
         $post->area = $request->area;
         $post->save();
 
@@ -68,10 +85,18 @@ class PostController extends Controller
      */
     public function show($id)   //個別の投稿詳細ページの表示
     {
+
     // URLのidと一致する投稿を取得
     $post = Post::find($id);    //findOrFail 404エラーになる
+    $comment = Comment::where('post_id','=',$id)->get();
 
-    return view('posts.show')->with('post', $post);
+    return view('posts.show', [
+        'post' => $post,
+        'comment' => $comment
+       
+    ]); 
+
+
     }
 
 
@@ -86,6 +111,7 @@ class PostController extends Controller
     // URLと一致する投稿を取得
     $post = Post::find($id);  //findOrFail 404エラーになる
 
+    
     return view('posts.edit')->with('post', $post);
     }
 
@@ -106,6 +132,8 @@ class PostController extends Controller
      
      $post->title = $request ->title;
      $post->area = $request->area;
+     $post->image = $request->image;   //画像のパスを表示させる（文字）
+    //  $request->file('image')->store('images','public');  //画像表示？？？
      $post->text = $request->text;
      $post->save();
 
