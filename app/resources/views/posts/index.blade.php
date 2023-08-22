@@ -53,7 +53,7 @@
                         @else
                             <img src="{{ asset('storage/noimage.jpeg') }}" class="card-img-top" alt="投稿写真">
                         @endif
-                            <p><a href="{{ route('users.show', $post ->users->id) }}">{{ $post -> users->name }}</a></p>
+                            <p><a href="{{ route('users.show', $post ->user->id) }}">{{ $post -> user->name }}</a></p>
                                 <h5 class="card-title">タイトル:{{ $post -> title }}</h5>
                                 <p class="card-text">内容:{{ $post -> text }}</p>
                                 <p class="card-text">地域:{{ $post -> area }}</p>

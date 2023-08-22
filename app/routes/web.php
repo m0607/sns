@@ -33,7 +33,6 @@ Route::get('/mypage', 'PostController@mypage')->name('mypage');
 //ユーザー情報編集
 Route::resource('/users','UsersController');
 
-
 //検索
 Route::get('/posts', 'PostController@index')->name('posts.serch');
 

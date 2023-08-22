@@ -5,9 +5,9 @@
 <div class=>
     <a href="{{ route('users.create') }}" class="btn btn-primary">ユーザー情報編集</a>
         @if( Auth::user()-> image)
-            <p><img src="{{ asset('storage/'.Auth::user()->image) }}" class="card-img-top ml-3 mt-3" style="width: 300px; height: 200px; border-radius:50%;" alt="写真"></p><!--ユーザーアイコン-->
+            <p><img src="{{ asset('storage/'.Auth::user()->image) }}" class="card-img-top" style="width: 300px; height: 200px; border-radius:50%;" alt="写真"></p><!--ユーザーアイコン-->
         @else
-            <img src="{{ asset('storage/noimage.jpeg') }}" class="card-img-top" alt="デフォルト写真">
+            <img src="{{ asset('storage/noimage.jpeg') }}" class="card-img-top" style="width: 300px; height: 200px; border-radius:50%;" alt="デフォルト写真">
         @endif
 </div>
         <p>{{ Auth::user()->name }}</p>
