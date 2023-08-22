@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
+use App\Post;  //モデル
+use App\Like;  //モデル
 
 class LikesController extends Controller
 {
@@ -13,7 +16,13 @@ class LikesController extends Controller
      */
     public function index()
     {
-        return view('likes.blade');  /** ? */
+        $like=Like::query()->where('user_id','=',Auth::id())->get();
+        $post=Post::query()->get();
+        return view('likes.likes', [
+            'like' => $like,
+            'post' => $post 
+        ]); 
+            
     }
 
     /**

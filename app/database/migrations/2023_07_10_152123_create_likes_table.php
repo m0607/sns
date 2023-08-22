@@ -17,6 +17,17 @@ class CreateLikesTable extends Migration
             $table->bigIncrements('id');   /** ID */
             $table->integer('user_id');    /** ユーザー名 */
             $table->integer('post_id');    /** 投稿ID */
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+
+            $table->foreign('post_id')
+                    ->references('id')
+                    ->on('posts')
+                    ->onDelete('cascade');
+
             $table->timestamps();          /** 登録日時、更新日時？ */
         });
     }

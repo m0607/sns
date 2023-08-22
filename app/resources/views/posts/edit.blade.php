@@ -2,10 +2,11 @@
  <!--外部化-->
 @extends('layouts.app')
 @section('content')
+@if(isset(Auth::user()->role) && Auth::user()->role == 0 || Auth::user()==null)
 
 <div class="container">
     <h1>投稿編集</h1>
-    <form action="{{ route('posts.update',$post->id) }}" method="post">
+    <form action="{{ route('posts.update',$post->id) }}" enctype="multipart/form-data" method="post">
     @csrf
     @method('put')
         <div class="form-group">
@@ -29,4 +30,5 @@
                 <input type="reset" value="キャンセル" class="btn btn-secondary" onclick='window.history.back(-1);'>
     </form>
 </div>
+@endif
 @endsection

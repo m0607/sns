@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Comments;   //モデル
+use App\Comment;   //モデル
 
 
 class CommentsController extends Controller
@@ -38,7 +38,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new Comments;
+        $comment = new Comment;
         $comment->user_id = Auth::id();  //->post_idはname
         $comment->post_id = $request->post_id;  //->post_idはname
         $comment->comment = $request->comment;

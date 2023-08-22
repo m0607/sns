@@ -42,7 +42,12 @@ class ReportsController extends Controller
         $report->content = $request->content;
         $report->save();
 
-        return view('reports.index');
+        $posts = \DB::table('posts')->get();    // データ全件取得
+
+        return view('posts.index', [
+            'posts' => $posts,            
+            // 'title' =>  $title,
+        ]);  /** 表示 */
     }
 
     /**

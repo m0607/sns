@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Post extends Model
 {
     protected $guarded = [
@@ -24,6 +23,11 @@ class Post extends Model
     public function report()
     {
         return $this->hasMany(Report::class);  //1対多の1
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);  //1対多の1
     }
 
 }

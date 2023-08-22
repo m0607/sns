@@ -23,9 +23,16 @@
     <div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                
+            @if(isset(Auth::user()->role) && Auth::user()->role == 0 || Auth::user()==null)
+                <a class="navbar-brand" href="{{ url('/posts') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                @else
+                <a class="navbar-brand" href="{{ url('/admin') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -64,6 +71,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    @if(Auth::user()->role ==0)
+                                    <a href="{{ route('mypage') }}" class="dropdown-item">マイページ</a>
+                                    <a href="{{ route('likes.index') }}" class="dropdown-item">いいね一覧</a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest

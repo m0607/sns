@@ -13,12 +13,13 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikesController;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -27,11 +28,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 //投稿
 Route::resource('/posts','PostController');
 
+//マイページ
+Route::get('/mypage', 'PostController@mypage')->name('mypage');
+//ユーザー情報編集
+Route::resource('/users','UsersController');
+
+
 //検索
 Route::get('/posts', 'PostController@index')->name('posts.serch');
 
 //いいね
-// Route::resource('likes','LikeController');
+Route::get('likes','PostController@index')->name('posts.index');
+Route::post('ajaxlike', 'PostController@ajaxlike')->name('posts.ajaxlike');
+//いいね一覧
+Route::get('/likes',[LikesController::class,'index'])->name('likes.index');//ユーザーボタン押して飛ぶ
+
 
 //報告
 Route::resource('/reports','ReportsController');

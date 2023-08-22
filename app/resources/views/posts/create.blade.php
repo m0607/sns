@@ -1,11 +1,12 @@
 <!-- 新規投稿登録画面 -->
 
 @extends('layouts.app')
- 
 @section('content')
+@if(isset(Auth::user()->role) && Auth::user()->role == 0 || Auth::user()==null)
+
 <div class="container">
     <h1>新規投稿</h1>
-        <form action="{{ route('posts.store') }}" method="post">
+        <form action="{{ route('posts.store') }}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="form-group">
                 <label for="title">タイトル</label>
@@ -28,4 +29,5 @@
                 <input type="reset" value="キャンセル" class="btn btn-secondary" onclick='window.history.back(-1);'>
         </form>
 </div>
+@endif
 @endsection
