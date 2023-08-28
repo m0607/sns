@@ -7,7 +7,6 @@
 @else
     <img src="{{ asset('storage/noimage.jpeg') }}" class="card-img-top" style="width: 300px; height: 200px; border-radius:50%;" alt="デフォルト写真">
 @endif
-
     <p>{{ $user->name }}</p>
     <p>{{ $user->profile }}</p>
     <body>
