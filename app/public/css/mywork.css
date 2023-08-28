@@ -1,0 +1,72 @@
+/* ボタンの基本デザイン */
+.button-004 {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    margin:0 auto;
+    padding: .9em 2em;
+    border: none;
+    border-bottom: solid 5px #0097cc;
+    border-radius: 25px;
+    background-color: #00c7fc;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    transition: .5s ease;
+}
+
+
+/* 探す・新規投稿ボタン */
+.button-004-1 {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin:0 auto;
+    padding: .9em 2em;
+    border: none;
+    border-bottom: solid 5px #0097cc;
+    border-radius: 25px;
+    background-color: #00c7fc;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    transition: .5s ease;
+}
+
+/* 削除ボタン */
+.button-004-2 {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin:0 auto;
+    padding: .9em 2em;
+    border: none;
+    border-bottom: solid 5px #e00c13;
+    border-radius: 25px;
+    background-color: #fc4710;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    transition: .5s ease;
+}
+
+/* キャンセル */
+.button-004-3 {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin:0 auto;
+    padding: .9em 2em;
+    border: none;
+    border-bottom: solid 5px #5f5d5d;
+    border-radius: 25px;
+    background-color: #676463;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    transition: .5s ease;
+}

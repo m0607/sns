@@ -18,7 +18,7 @@
     <div class="justify-content d-flex justify-content-center">
         @if(Auth::user()->id==$post->user_id)
             <form action="{{ route('posts.edit',$post->id)}}" method="get">
-                <input type="submit" value="投稿編集" class="btn btn-primary mx-5">
+                <input type="submit" value="投稿編集" class="btn button-004-1 mx-5">
             </form>
         @else
         
@@ -76,7 +76,7 @@
     @csrf
     @method('delete')
         <div class="text-center col-lg-15 mt-4">
-            <button type ="submit" class= "btn btn-primary bg-danger" onclick='return confirm("削除しますか？");'>投稿削除</button>
+            <button type ="submit" class= "btn button-004-2" onclick='return confirm("削除しますか？");'>投稿削除</button>
         </div>
 </form>
 @endif

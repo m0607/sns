@@ -26,8 +26,8 @@
             <label for="body">エピソード</label>
             <textarea name="text" id="body" class="form-control" rows="5" placeholder="エピソードを入力してください">{{ $post -> text }}</textarea>
         </div>
-                <input type="submit" value="編集" class="btn btn-primary">
-                <input type="reset" value="キャンセル" class="btn btn-secondary" onclick='window.history.back(-1);'>
+                <input type="submit" value="編集" class="btn button-004">
+                <input type="reset" value="キャンセル" class="btn button-004-3" onclick='window.history.back(-1);'>
     </form>
 </div>
 @endif

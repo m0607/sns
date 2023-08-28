@@ -7013,9 +7013,9 @@ button.bg-secondary:focus {
   background-color: #545b62 !important;
 }
 
-.bg-success {
+/* .bg-success {
   background-color: #38c172 !important;
-}
+} */
 
 a.bg-success:hover,
 a.bg-success:focus,
@@ -10837,6 +10837,8 @@ a.text-dark:focus {
   visibility: hidden !important;
 }
 
+
+
 @media print {
   *,
   *::before,
@@ -10929,5 +10931,6 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+  
 }
 

@@ -1,6 +1,6 @@
 <!--  -->
- <!--外部化-->
- @extends('layouts.app')
+
+@extends('layouts.app')
 @section('content')
 
 <div class="container">
@@ -20,8 +20,8 @@
             <label for="body">プロフィール</label>
             <textarea name="profile" id="body" class="form-control" rows="5" placeholder="プロフィールを入力してください">{{ Auth::user()->profile }}</textarea>
         </div>
-                <input type="submit" value="編集" class="btn btn-primary">
-                <input type="reset" value="キャンセル" class="btn btn-secondary" onclick='window.history.back(-1);'>
+            <input type="submit" value="編集" class="btn button-004-1">
+            <input type="reset" value="キャンセル" class="btn button-004-3" onclick='window.history.back(-1);'>
     </form>
 </div>
 @endsection
